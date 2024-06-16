@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
     <style>
-         body {
+        body {
             font-family: 'Arial', sans-serif;
-           /* background-image: url(/myenv/website/templates/secondpage.jpg); /* Use a relative path */
-           background-image: url('/static/secondpage.jpg');
+            background-image: url('/static/thirdImage.jpg'); /* Update the path to your background image */
             background-size: cover;
             background-position: center;
             margin: 0;
@@ -17,11 +15,44 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            
+            color: white;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .container::before, .container::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff, #00ffff);
+            background-size: 400%;
+            border-radius: 10px;
+            z-index: -1;
+            animation: borderAnimation 20s linear infinite;
+        }
+
+        .container::after {
+            filter: blur(20px);
+        }
+
+        @keyframes borderAnimation {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
         }
 
         form {
-            background-color: #f5e6e6;
+            background-color: rgba(245, 230, 230, 0.9);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -32,8 +63,7 @@
             font-size: 18px;
             display: block;
             margin-bottom: 10px;
-            
-            
+            color: black; /* Ensure text is visible on the form background */
         }
 
         input {
@@ -60,13 +90,13 @@
     </style>
 </head>
 <body>
-    <form action="/quiz" method="post">
-        <label for="username">Enter your name : </label>
-        <input type="text" id="username" name="username" required>
-        <!-- <img src="{{ url_for('static', filename='secondpage.jpg') }}" alt="Image"> -->
-
-        <br>
-        <button type="submit">Start Quiz</button>
-    </form>
+    <div class="container">
+        <form action="/quiz" method="post">
+            <label for="username">Enter your name : </label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <button type="submit">Start Quiz</button>
+        </form>
+    </div>
 </body>
 </html>
